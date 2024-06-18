@@ -1,0 +1,23 @@
+{
+  "name": "n3estoque_2024",
+  "version": "1.0.0",
+  "description": "N3 de frot back e banco, estoque ",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "test:coverage": "jest --coverage --detectOpenHandles"
+  },
+  "author": "Lucas Mello",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-mongoose-mock": "^1.2.0",
+    "mongodb-memory-server": "^9.3.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.1.5"
+  }
+}

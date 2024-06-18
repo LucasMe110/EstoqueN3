@@ -1,0 +1,29 @@
+//produtos  se liga no plural 
+
+{
+	"nome": "Iphone Fourteen",
+	"preco": 1000,
+	"categoria": "Apple",
+	"estoque": 150
+}
+
+//clientes
+
+{
+	"nome": "joao",
+	"email": "joaodopneu@gmail.com",
+	"telefone": "48988027807"
+}
+
+//pedidos
+
+{
+    "clienteId": "6670c5c3887ac5ab38186eaa",
+    "produtos": [
+      {
+        "produtoId": "6670c534887ac5ab38186ea5",
+        "quantidade": 9
+      }
+    ],
+    "data": "2024-06-16T00:00:00Z"
+  }
