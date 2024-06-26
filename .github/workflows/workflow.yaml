@@ -19,11 +19,12 @@ jobs:
         run: npm install
 
 
+
       - name: Set permissions for all bin scripts
         run: chmod +x ./node_modules/.bin/*
       
       - name: Run Jest
-        run: npm test
+        run: npx jest --detectOpenHandles --forceExit
 
   delivery:
     runs-on: ubuntu-latest

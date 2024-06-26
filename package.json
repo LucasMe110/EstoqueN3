@@ -7,7 +7,7 @@
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
     "start-backend": "node src/index.js",
     "start-frontend": "react-scripts start --prefix front",
-    "test": "jest --detectOpenHandles",
+    "test": "jest --detectOpenHandles --forceExit",
     "test:coverage": "jest --coverage --detectOpenHandles"
   },
   "author": "Lucas Mello",
@@ -25,4 +25,5 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.1.5"
   }
+  
 }
