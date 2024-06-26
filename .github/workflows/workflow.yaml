@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 21  # Especifique a versão do Node.js adequada ao seu projeto
+          node-version: 21.  # Especifique a versão do Node.js adequada ao seu projeto
 
       - name: Set execute permissions for Jest
         run: chmod +x node_modules/.bin/jest
