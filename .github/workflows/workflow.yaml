@@ -23,7 +23,7 @@ jobs:
         run: chmod +x ./node_modules/.bin/*
       
       - name: Run Jest
-        run: npx jest --detectOpenHandles
+        run: npm test
 
   delivery:
     runs-on: ubuntu-latest
