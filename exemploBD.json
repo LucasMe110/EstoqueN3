@@ -20,10 +20,10 @@
 {
     "clienteId": "6670c5c3887ac5ab38186eaa",
     "produtos": [
-      {
+    {
         "produtoId": "6670c534887ac5ab38186ea5",
         "quantidade": 9
-      }
+    }
     ],
     "data": "2024-06-16T00:00:00Z"
-  }
+}
