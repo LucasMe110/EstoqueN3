@@ -10,19 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      # Sets up the Node.js environment
       - uses: actions/setup-node@v2
         with:
           node-version: '21'
 
-      # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Run Jest tests using npx
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Set permissions for all bin scripts
+        run: chmod +x ./node_modules/.bin/*
+      
       - name: Run Jest
         run: npx jest --detectOpenHandles
 
@@ -32,18 +33,15 @@ jobs:
     if: ${{ success() }}
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
 
-      # Set up Git
       - name: Set up Git
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
       
-      # Merge develop into main
       - name: Merge to main
         run: |
           git fetch
