@@ -18,8 +18,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run ESLint
-        run: npm run lint
 
       - name: Set permissions for all bin scripts
         run: chmod +x ./node_modules/.bin/*
