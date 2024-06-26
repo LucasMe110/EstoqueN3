@@ -6,7 +6,9 @@ const cors = require("cors"); // Import the CORS package
 const app = express();
 app.use(cors());
 app.use(express.json());
-const port = 3000;
+const port = 3000;  
+
+
 
 // Conectando ao MongoDB
 mongoose.connect("mongodb+srv://eduardosmyk:cesusc@cluster0.es2gxku.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
