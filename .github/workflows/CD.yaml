@@ -30,7 +30,7 @@ jobs:
           switches: -avzr --delete
           path: ./*
           args: "-rltgoDzvO --delete"
-          remote_path: /Estoque_n3_2024.1/ # Pasta onde está o nosso projeto
+          remote_path: Estoque_n3_2024.1/ # Pasta onde está o nosso projeto
           remote_host: "ec2-15-228-235-141.sa-east-1.compute.amazonaws.com"
           remote_user: "ubuntu"
           remote_key: "${{ secrets.SSH_PRIVATE_KEY }}"
