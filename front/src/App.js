@@ -9,7 +9,8 @@ import logo from "./assets/imagens/logo512.png";
 import "./index.css";
 
 const App = () => {
-  const [selectBtn, setSelectBtn] = useState("");
+  // Removendo a variável selectBtn porque não está sendo usada diretamente
+  const [, setSelectBtn] = useState(""); // Utilizando uma array destructuring para ignorar a primeira posição
 
   const handleClickTabs = (tab) => {
     setSelectBtn(tab);
