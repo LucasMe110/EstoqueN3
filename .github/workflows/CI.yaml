@@ -37,12 +37,12 @@ jobs:
 
       - name: Set up Git
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
+          git config --global user.email "lucasmellomo@gmail.com"
+          git config --global user.name "LucasMe110"
       
-      - name: Merge to test
+      - name: Merge to main
         run: |
-
-          git checkout test
+          git fetch
+          git checkout main
           git merge develop --allow-unrelated-histories --no-edit
-          git push origin test
+          git push origin main
