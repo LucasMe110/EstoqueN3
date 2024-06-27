@@ -26,7 +26,8 @@ jobs:
       - name: Run Jest
         run: npx jest --detectOpenHandles --forceExit
 
-      runs-on: ubuntu-latest
+    delivery:
+    runs-on: ubuntu-latest
     needs: build
     if: ${{ success() }}
     steps:
