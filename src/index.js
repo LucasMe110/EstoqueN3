@@ -1,17 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors"); // Import the CORS package
-
+const cors = require("cors");
+const path = require("path");
+const React = require('react');
+const ReactDOMServer = require('react-dom/server');
+const App = require('./front/src/App').default; // Ajuste conforme necessário
 
 const app = express();
+const port = process.env.PORT || 3000;
+
+// Middleware para servir arquivos estáticos
+app.use(express.static(path.join(__dirname, 'front/build')));
 app.use(cors());
 app.use(express.json());
-const port = 3000;  
-
-//testeS
 
 // Conectando ao MongoDB
-mongoose.connect("mongodb+srv://eduardosmyk:cesusc@cluster0.es2gxku.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect("mongodb+srv://eduardosmyk:cesusc@cluster0.es2gxku.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
 // Definindo os modelos
 const Produto = mongoose.model('Produto', {
     nome: String,
@@ -142,29 +150,23 @@ app.delete("/clientes/:id", async (req, res) => {
 // Rotas para o modelo Pedido
 app.post("/pedidos", async (req, res) => {
     try {
-        // Busque o cliente pelo ID
         const cliente = await Cliente.findById(req.body.clienteId);
         if (!cliente) {
             return res.status(404).send({ message: "Cliente não encontrado" });
         }
 
-        // Array para armazenar detalhes dos produtos
         let produtosDetalhes = [];
         let total = 0;
 
-        // Itere sobre cada produto no pedido
         for (const item of req.body.produtos) {
-            // Busque o produto pelo ID
             const produto = await Produto.findById(item.produtoId);
             if (!produto) {
                 return res.status(404).send({ message: `Produto com ID ${item.produtoId} não encontrado` });
             }
 
-            // Calcule o subtotal para o produto
             const subtotal = produto.preco * item.quantidade;
             total += subtotal;
 
-            // Adicione os detalhes do produto ao array
             produtosDetalhes.push({
                 produtoId: item.produtoId,
                 nome: produto.nome,
@@ -174,7 +176,6 @@ app.post("/pedidos", async (req, res) => {
             });
         }
 
-        // Crie o novo pedido
         const pedido = new Pedido({
             clienteId: req.body.clienteId,
             produtos: produtosDetalhes,
@@ -205,29 +206,23 @@ app.get("/pedidos", async (req, res) => {
 
 app.put("/pedidos/:id", async (req, res) => {
     try {
-        // Busque o pedido pelo ID
         let pedido = await Pedido.findById(req.params.id);
         if (!pedido) {
             return res.status(404).send({ message: "Pedido não encontrado" });
         }
 
-        // Array para armazenar detalhes dos produtos
         let produtosDetalhes = [];
         let total = 0;
 
-        // Itere sobre cada produto no pedido
         for (const item of req.body.produtos) {
-            // Busque o produto pelo ID
             const produto = await Produto.findById(item.produtoId);
             if (!produto) {
                 return res.status(404).send({ message: `Produto com ID ${item.produtoId} não encontrado` });
             }
 
-            // Calcule o subtotal para o produto
             const subtotal = produto.preco * item.quantidade;
             total += subtotal;
 
-            // Adicione os detalhes do produto ao array
             produtosDetalhes.push({
                 produtoId: item.produtoId,
                 nome: produto.nome,
@@ -237,16 +232,13 @@ app.put("/pedidos/:id", async (req, res) => {
             });
         }
 
-        // Atualize os detalhes do pedido
         pedido.clienteId = req.body.clienteId;
         pedido.produtos = produtosDetalhes;
         pedido.data = req.body.data;
         pedido.total = total;
 
-        // Salve o pedido atualizado
         await pedido.save();
 
-        // Busque o cliente pelo ID
         const cliente = await Cliente.findById(req.body.clienteId);
         if (!cliente) {
             return res.status(404).send({ message: "Cliente não encontrado" });
@@ -271,12 +263,29 @@ app.delete("/pedidos/:id", async (req, res) => {
     }
 });
 
-// Exportar app para testes
-module.exports = app;
+// Rota para SSR (Server-Side Rendering)
+app.get('/ssr', (req, res) => {
+  const html = ReactDOMServer.renderToString(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
 
-// Iniciar o servidor se o script for executado diretamente
-if (require.main === module) {
-    app.listen(port, () => {
-        console.log(`App running on port ${port}`);
-    });
-}
+  res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>React SSR</title>
+      <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    </head>
+    <body>
+      <div id="root">${html}</div>
+      <script src="/static/js/main.js"></script>
+    </body>
+    </html>
+  `);
+});
+
+// Rota padrão para servir o aplicativo React
