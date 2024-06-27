@@ -43,5 +43,5 @@ jobs:
       
       - name: Merge to main
         run: |
-          git merge develop --allow-unrelated-histories --no-edit
+          
           git push origin main
