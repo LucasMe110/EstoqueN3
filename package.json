@@ -15,7 +15,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "mongoose": "^8.4.1"
+    "mongoose": "^8.4.1",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
@@ -25,5 +26,4 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.1.5"
   }
-  
 }
