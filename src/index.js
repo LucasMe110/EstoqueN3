@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 const port = 3000;  
 
-//teste
+//testeS
 
 // Conectando ao MongoDB
 mongoose.connect("mongodb+srv://eduardosmyk:cesusc@cluster0.es2gxku.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
