@@ -1,6 +1,6 @@
 // front/src/App.js
 
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CadastroCliente from "./components/cadastroCliente";
 import CadastroProduto from "./components/cadastroProduto";
@@ -9,12 +9,6 @@ import logo from "./assets/imagens/logo512.png";
 import "./index.css";
 
 const App = () => {
-  const [selectBtn, setSelectBtn] = useState("");
-
-  const handleClickTabs = (tab) => {
-    setSelectBtn(tab);
-  };
-
   return (
     <div className="App">
       <div className="logo">
@@ -25,17 +19,17 @@ const App = () => {
       <Router>
         <div className="header">
           <Link to="/cadastro-cliente">
-            <button className="btn" onClick={() => handleClickTabs("cadastroCliente")}>
+            <button className="btn">
               Cadastro cliente
             </button>
           </Link>
           <Link to="/cadastro-produto">
-            <button className="btn" onClick={() => handleClickTabs("cadastroProduto")}>
+            <button className="btn">
               Cadastro produto
             </button>
           </Link>
           <Link to="/pedidos">
-            <button className="btn" onClick={() => handleClickTabs("pedidos")}>
+            <button className="btn">
               Pedidos
             </button>
           </Link>
